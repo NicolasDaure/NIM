@@ -6,6 +6,12 @@ public class Coup {
 	private int numeroLigne;
 	private int nombreJetonsRetires;
 	
+	/**
+	 * Constructeur d'un coup à partir d'un code de partie, d'un numéro de ligne et d'un nombre de jetons.
+	 * @param codePartie
+	 * @param lignes
+	 * @param jetonsEnleves
+	 */
 	public Coup(long codePartie, int lignes, int jetonsEnleves){
 		this.setIdPartie(codePartie);
 		this.setNumeroLigne(lignes);

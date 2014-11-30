@@ -103,6 +103,14 @@ public class Partie {
 		}
 	}
 	
+	public int[] partieToTab(){
+		int[] tab = new int[this.nbLignes];
+		for(int i = 0; i < this.lignesPartie.size(); i++){
+			tab[i] = this.lignesPartie.get(i).longueurLigne();
+		}
+		return tab;
+	}
+	
 	public String toString(){
 		String str = "";
 		for(int i = 0; i < this.lignesPartie.size(); i++){

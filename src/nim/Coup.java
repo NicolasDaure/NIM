@@ -2,7 +2,7 @@ package nim;
 
 public class Coup {
 	
-	private long idPartie;
+	private long idPartie; // coucou
 	private int numeroLigne;
 	private int nombreJetonsRetires;
 	

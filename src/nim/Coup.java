@@ -25,6 +25,10 @@ public class Coup {
 		return str;
 	}
 
+	/**
+	 * Retourne le numéro de la ligne appelante.
+	 * @return numeroLigne
+	 */
 	public int getNumeroLigne() {
 		return numeroLigne;
 	}

@@ -4,6 +4,9 @@ import java.util.*;
 
 public class Partie {
 	
+	/**
+	 * Variable représentant le nombre maximum de jeton par ligne.
+	 */
 	static int nbJetonsMaxLigne = 14;
 	static Random aleatoire = new Random();
 

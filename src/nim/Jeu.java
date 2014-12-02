@@ -9,15 +9,25 @@ public class Jeu {
 	public static void main(String args[]){
 
 		Scanner clavier = new Scanner(System.in);
-		Data donnees = new Data();
+		//TODO
 		Joueur j1 = new Joueur(0, "Nicolas");
 		Joueur j2 = new Joueur(1, "Florent");
-		donnees.ajouterJoueur(j1);
-		donnees.ajouterJoueur(j2);
 		System.out.println(donnees.toString());
 		nouvellePartie2J(clavier, 0, j1, j2);
 		System.out.println(j1.toString());
 		System.out.println(j2.toString());
+		
+	}
+	
+	public static Joueur recupererJoueur(Scanner clavier){
+		System.out.println("Saisir votre pseudo de Joueur de NIM :");
+		String joueur = clavier.next();
+		//TODO Rechercher un joueur dans la base suivant le pseudo
+		Joueur j1 = new Joueur(/*Les attributs*/);
+	}
+	
+	public static Joueur inscrireJoueur(Scanner clavier){
+		System.out.println("Nouveau joueur :");
 		
 	}
 	

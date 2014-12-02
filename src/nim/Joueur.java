@@ -2,17 +2,48 @@ package nim;
 
 import java.util.*;
 
+/**
+ * @author Nicolas
+ *
+ */
 public class Joueur {
 	
 	/**
-	 * 
+	 * Attribut représentant l'identifiant du Joueur (Clé primaire). Cet identifiant est unique.
 	 */
 	private int idJoueur;
+	
+	/**
+	 * Attribut représentant le pseudo du joueur. Cet pseudo est unique.
+	 */
 	private String pseudoJoueur;
+	
+	/**
+	 * Attribut représentant le nombre de partie jouées par le joueur.
+	 */
 	private int partiesJouees;
+	
+	/**
+	 * Attribut représentant le nombre de partie gagnées par le joueur.
+	 */
 	private int partieGagnees;
+	
+	/**
+	 * Liste de tous les coups joués par un joueur.
+	 */
 	private ArrayList<Coup> listeCoups;
 	
+	public Joueur(){
+		
+	}
+	
+	/**
+	 * Constructeur d'un joueur à partir d'un idJoueur et d'un pseudo (nouveau Joueur).
+	 * @param idJoueur
+	 * 			Identifiant du joueur.
+	 * @param pseudo
+	 * 			Pseudo du joueur.
+	 */
 	public Joueur(int idJoueur, String pseudo){
 		this.setIdJoueur(idJoueur);
 		this.setPseudoJoueur(pseudo);
@@ -21,6 +52,37 @@ public class Joueur {
 		this.setListeCoups(new ArrayList<Coup>());
 	}
 	
+	/**
+	 * Constructeur strict d'un joueur (récupération des données d'un joueur dans la base).
+	 * 
+	 * @param idJoueur
+	 * 			Identifiant du joueur.
+	 * @param pseudo
+	 * 			Pseudo du joueur.
+	 * @param nbPartiesJouees
+	 * 			Nombre de parties jouées par le joueur.
+	 * @param nbPartieGagnees
+	 * 			Nombre de parties gagnées par le joueur.
+	 */
+	public Joueur(int idJoueur, String pseudo, int nbPartiesJouees, int nbPartieGagnees){
+		this.setIdJoueur(idJoueur);
+		this.setPseudoJoueur(pseudo);
+		this.setPartiesJouees(nbPartiesJouees);
+		this.setPartieGagnees(nbPartieGagnees);
+		this.setListeCoups(new ArrayList<Coup>());
+	}
+	
+
+	/**
+	 * Permet au joueur d'appel de jouer un coup dans une partie.
+	 * @param p
+	 * 			La partie courante.
+	 * @param indexLigne
+	 * 			La ligne où le joueur veut retirer des jetons.
+	 * @param nbJetons
+	 * 			Le nombre de jetons que le joueur veut retirer.
+	 * @return true si le coup est validé
+	 */
 	public boolean jouerCoup(Partie p, int indexLigne, int nbJetons){
 		boolean coupReussi = false;
 		try{
@@ -33,6 +95,31 @@ public class Joueur {
 		return coupReussi;
 	}
 	
+	/**
+	 * Méthode récursive qui retourne le gagnant de la partie. Permet au joueur de jouer son tour (contre un adversaire humain).
+	 * <p>
+	 * <ul>
+	 * Cette méthode procède en plusieurs étapes :
+	 * <li>
+	 * Une condition d'arrêt : si la partie est vide, le jeu s'interrompt et l'adversaire gagne.
+	 * </li>
+	 * <li>
+	 * Tant que le coup du joueur n'est pas valide, on esaye de jouer un coup.
+	 * </li>
+	 * <li>
+	 * On fait un appel récursif en inversant le joueur d'appel et l'adversaire.
+	 * </li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param clavier
+	 * 			Le scanner utilisé par les joueurs (pas de déclaration multiple).
+	 * @param p
+	 * 			La partie courante.
+	 * @param adversaire
+	 * 			L'adversaire du joueur appelant.
+	 * @return le gagnant de la partie.
+	 */
 	public Joueur jouerTour(Scanner clavier, Partie p, Joueur adversaire){
 		if(p.estVide()){
 			return adversaire;

@@ -1,3 +1,4 @@
+import java.sql.Connection;
 public class ajout_joueur {
 	
 	public static int nbJoueurs(){

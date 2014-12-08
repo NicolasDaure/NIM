@@ -80,14 +80,38 @@ public class récuperation_Données {
 			      
 		    }
 		}
-	public static void main(String[] args) {      
-		String pseudo ="'???'";
-		
-		if (existeJoueur(pseudo)){
-			System.out.println("le joueur existe");
-			recuperationDonnées(pseudo);
-		}
-		else System.out.println("joueur inconnu");
-		
+public static String getMotDePasse(String pseudo){
+String pseu="ERROR";
+try {
+Class.forName("org.postgresql.Driver"); 
+
+String url = "jdbc:postgresql://localhost:5432/Projet_NIM";
+String user = "postgres";  
+String passwd = "3210Azerty"; 
+
+Connection conn = DriverManager.getConnection(url, user, passwd);
+Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+ResultSet result = state.executeQuery("SELECT * FROM joueurs WHERE pseudo_joueur ="+pseudo);
+	if( result.next()){
+	pseu = result.getObject(5).toString();
 	}
+}
+catch (Exception e) { 
+	e.printStackTrace();		      	      
+  }
+return pseu;
+}
+
+
+public static void main(String[] args) {      
+	String pseudo ="'???'";
+		
+if (existeJoueur(pseudo)){
+System.out.println("le joueur existe");
+recuperationDonnées(pseudo);
+}
+else System.out.println("joueur inconnu");
+		
+}
 }

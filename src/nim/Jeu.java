@@ -113,13 +113,13 @@ public class Jeu {
 	/*-------------------------- OPERATIONS BD ------------------------------*/
 	
 	public static boolean pseudoTrouve(String pseudo){
-		//TODO Chercher pseudo dans la base. Retourne vrai si trouvé, faux sinon.
-		return true;
+		existeJoueur(pseudo); // la fonction se trouve dans la classe recuperation données
 	}
 	
 	public static boolean motDePasseCorrespondJoueur(String pseudo, String password){
-		//TODO Vérifier que le mot de passe saisi corrrespond bien au mot de passe du pseudo saisi.
-		return true;
+			existeJoueur(pseudo); 
+			recuperationDonnées(pseudo);
+	
 	}
 	
 	public static void insererJoueurBD(String pseudo, String password){

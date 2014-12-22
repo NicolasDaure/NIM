@@ -9,12 +9,12 @@ public class Jeu {
 	public static Joueur joueur1;
 	public static Joueur joueur2;
 		
-	public static void main(String args[]){
+	/*public static void main(String args[]){
 
 		Scanner clavier = new Scanner(System.in);
 		
 		
-	}
+	}*/
 	
 	
 	public static boolean loginJoueur(Scanner clavier){

@@ -1,5 +1,6 @@
 package nim;
 
+
 public class Ligne {
 
 	private Jeton queueDeLigne;

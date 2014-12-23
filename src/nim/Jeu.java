@@ -11,19 +11,34 @@ public class Jeu {
 		
 	public static void main(String args[]){
 
-		Scanner clavier = new Scanner(System.in);
-		
-		
 	}
 	
-	public static boolean recupererJoueur(Scanner clavier){
-		boolean joueurRecupere = false;
-		System.out.println("Saisir votre pseudo de Joueur de NIM :");
+	
+	public static boolean loginJoueur(Scanner clavier){
+		boolean loginReussi = false;
+		System.out.println("Saisir votre pseudo :");
 		String pseudoJoueur = clavier.next();
-		//TODO Rechercher un joueur dans la base suivant le pseudo
-		joueurTemp = new Joueur(/*Les attributs*/);
-		return joueurRecupere;
+		System.out.println("Saisir votre mot de passe :");
+		String password = clavier.next();
+		try{
+			pseudoConforme(pseudoJoueur);
+		}
+		catch(InscriptionException ie){
+			ie.getMessage();
+		}
+		try{
+			pseudoExistant(pseudoJoueur);
+			verificationMdp(pseudoJoueur, password);
+			joueurTemp = downloadJoueur(pseudoJoueur);
+			loginReussi = true;
+		}
+		catch(LoginException le){
+			le.getMessage();
+		}
+		return loginReussi;	
 	}
+	
+	/*--------------------------INSCRIPTION------------------------------*/
 	
 	public static boolean inscrireJoueur(Scanner clavier){
 		boolean inscriptionReussie = false;
@@ -37,17 +52,18 @@ public class Jeu {
 			pseudoConforme(pseudoNouveauJoueur);
 			pseudoLibre(pseudoNouveauJoueur);
 			mdp1EqualsMdp2(password1, password2);
-			//TODO Ajouter un joueur dans la base avec 0 parties et un identifiant et avec le pseudo et mdps générés.
-			//TODO Récupérer ce nouveau joueur
-			joueurTemp = new Joueur(/**/);
+			insererJoueurBD(pseudoNouveauJoueur, password1);
+			joueurTemp = downloadJoueur(pseudoNouveauJoueur);
 			inscriptionReussie = true;
 		}
 		catch(InscriptionException ie){
 			ie.getMessage();
 		}
 		return inscriptionReussie;
-
 	}
+	
+	/*--------------------------OPERATIONS PSEUDO------------------------------*/
+
 	
 	public static void pseudoConforme(String pseudo) throws InscriptionException{
 		if(pseudo.length() < 4 || pseudo.length() > 10){
@@ -64,16 +80,68 @@ public class Jeu {
 	}
 	
 	public static void pseudoLibre(String pseudo) throws InscriptionException{
-		if(/*TODO Le pseudo existe déjà dans la base.*/){
+		if(pseudoTrouve(pseudo)){
 			throw new InscriptionException(pseudo);
 		}
 	}
+	
+	public static void pseudoExistant(String pseudo) throws LoginException{
+		if(!pseudoTrouve(pseudo)){
+			throw new LoginException(pseudo);
+		}
+	}
+	
+	
+	/*-------------------------- OPERATIONS MDP ------------------------------*/
+
 	
 	public static void mdp1EqualsMdp2(String mdp1, String mdp2) throws InscriptionException{
 		if(!mdp1.equals(mdp2)){
 			throw new InscriptionException(mdp1, mdp2);
 		}
 	}
+	
+	public static void verificationMdp(String pseudo, String password) throws LoginException{
+		if(!motDePasseCorrespondJoueur(pseudo, password)){
+			throw new LoginException(pseudo, password);
+		}
+	}
+	
+	/*-------------------------- OPERATIONS BD ------------------------------*/
+	
+	public static boolean pseudoTrouve(String pseudo){  //fonction OK
+		if (RecuperationDonnees.existeJoueur(pseudo)){
+			return true;
+		}
+		else return false;
+	}
+	
+	public static boolean motDePasseCorrespondJoueur(String pseudo, String password){ // fonction OK
+		if(RecuperationDonnees.getMotDePasse(pseudo).equals(password))return true;
+		else return false;
+	}
+	
+	public static void insererJoueurBD(String pseudo, String password){  //fonction OK
+		 int n = AjoutJoueur.nbJoueurs() + 1;
+		 AjoutJoueur.ajouterNouveauJoueur(n, pseudo, password);
+	}
+	
+	public static void uploadJoueur(Joueur j){ // fonction OK
+		int n =j.getIdJoueur();
+		int nbPartiesJouees = j.getPartiesJouees();
+		int nbWin = j.getPartieGagnees();
+		UpdateJoueur.updateNbWin(n,nbWin);
+		UpdateJoueur.updateNbPartiesJouees(n,nbPartiesJouees);
+	}
+	
+	public static Joueur downloadJoueur(String pseudo){ //fonction OK
+		int num = RecuperationDonnees.getNumJoueur(pseudo);
+		int nbPartie = RecuperationDonnees.getNbPartiesJouees(pseudo);
+		int Win = RecuperationDonnees.getWin(pseudo);
+		return new Joueur(num,pseudo,nbPartie,Win);
+	}
+	
+	/*-------------------------- EXPRESSIONS REGULIERES  ------------------------------*/
 	
 	public static boolean estChiffre(char c){
 		return (int)c < 48 && (int)c > 57;
@@ -86,6 +154,9 @@ public class Jeu {
 	public static boolean estLettreMin(char c){
 		return (int)c < 97 && (int)c > 122;
 	}
+	
+	
+	/*-------------------------- PARTIE 2 JOUEURS ------------------------------------*/
 	
 	public static void nouvellePartie2J(Scanner clavier, long idPartie, Joueur j1, Joueur j2){
 		System.out.println("*******NOUVELLE PARTIE 2J**********\n");
@@ -103,6 +174,9 @@ public class Jeu {
 		System.out.println("Félicitations " + gagnant.getPseudoJoueur() + ", vous avez gagné !");
 		gagnant.setPartieGagnees(gagnant.getPartieGagnees() + 1);
 	}
+	
+	
+	/*-------------------------- PARTIE 1 JOUEUR -------------------------------------*/
 	
 	public static void nouvellePartie(Scanner clavier, long idPartie, Joueur j, IA ia){
 		System.out.println("*******NOUVELLE PARTIE 1J**********\n");

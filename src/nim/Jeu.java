@@ -109,6 +109,7 @@ public class Jeu {
 	
 	/*-------------------------- OPERATIONS BD ------------------------------*/
 	
+<<<<<<< HEAD
 	public static boolean pseudoTrouve(String pseudo){  //fonction OK
 		if (RecuperationDonnees.existeJoueur(pseudo)){
 			return true;
@@ -139,6 +140,29 @@ public class Jeu {
 		int nbPartie = RecuperationDonnees.getNbPartiesJouees(pseudo);
 		int Win = RecuperationDonnees.getWin(pseudo);
 		return new Joueur(num,pseudo,nbPartie,Win);
+=======
+	public static boolean pseudoTrouve(String pseudo){
+		existeJoueur(pseudo); // la fonction se trouve dans la classe recuperation données
+	}
+	
+	public static boolean motDePasseCorrespondJoueur(String pseudo, String password){
+			existeJoueur(pseudo); 
+			recuperationDonnées(pseudo);
+	
+	}
+	
+	public static void insererJoueurBD(String pseudo, String password){
+		//TODO Insérer un nouveau joueur dans la BD à partir de pseudo et password.
+	}
+	
+	public static void uploadJoueur(Joueur j){
+		//TODO Mettre à jour tous les attributs du joueur d'identifiant j.idJoueur.
+	}
+	
+	public static Joueur downloadJoueur(String pseudo){
+		//TODO Récupérer tous les attributs d'un joueur du pseudo correspondant.
+		return new Joueur(/*Tous les attributs du joueur*/);
+>>>>>>> FETCH_HEAD
 	}
 	
 	/*-------------------------- EXPRESSIONS REGULIERES  ------------------------------*/

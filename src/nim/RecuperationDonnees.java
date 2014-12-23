@@ -139,7 +139,7 @@ public class RecuperationDonnees {
 			Statement state = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
 			ResultSet result = state.executeQuery("SELECT * FROM joueurs WHERE pseudo_joueur ="+pseudo);
-			if( result.next()){
+			if(result.next()){
 				Win  =(int) result.getObject(4); 
 			}  
 		}	

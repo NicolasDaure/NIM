@@ -88,7 +88,6 @@ public class Joueur {
 		try{
 			coupReussi = p.enleverXJetonsLigne(indexLigne, nbJetons);
 			this.listeCoups.add(new Coup(p.getIdPartie(), indexLigne, nbJetons));
-			//TODO Ajouter le coup dans la base
 		}
 		catch(CoupException ce){
 			ce.getMessage();

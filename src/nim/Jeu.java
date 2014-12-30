@@ -10,7 +10,7 @@ public class Jeu {
 	public static Joueur joueur2;
 		
 	public static void main(String args[]){
-
+		
 	}
 	
 	
@@ -146,15 +146,15 @@ public class Jeu {
 	/*-------------------------- EXPRESSIONS REGULIERES  ------------------------------*/
 	
 	public static boolean estChiffre(char c){
-		return (int)c < 48 && (int)c > 57;
+		return (int)c >= 48 && (int)c <= 57;
 	}
 	
 	public static boolean estLettreMaj(char c){
-		return (int)c < 65 && (int)c > 90;
+		return (int)c >= 65 && (int)c <= 90;
 	}
 	
 	public static boolean estLettreMin(char c){
-		return (int)c < 97 && (int)c > 122;
+		return (int)c >= 97 && (int)c <= 122;
 	}
 	
 	

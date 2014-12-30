@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class InsertPartie {
+	
 	public static int nbParties(){
 		try{ 
 			Class.forName("org.postgresql.Driver"); // charge le driver
@@ -49,11 +50,6 @@ public class InsertPartie {
 		catch (Exception e) { // leve une exception en cas d'erreur
 			e.printStackTrace();		     			      
 		}		
-	}
-
-	public static void main(String[] args) {   
-		int n = nbParties() + 1;
-		insertPartie(n,3,1);
 	}
 
 }

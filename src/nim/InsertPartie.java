@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class InsertPartie {
 	
-	public static int nbParties(){
+	public static int getLastIdParties(){
 		try{ 
 			Class.forName("org.postgresql.Driver"); // charge le driver
 			String url = "jdbc:postgresql://localhost:5432/Projet_NIM"; // URL de la base
@@ -18,7 +18,7 @@ public class InsertPartie {
 
 			ResultSet Requete = null; // indispensable pour le count (sinom java pas content)
 			Statement state = conn.createStatement();
-			Requete = state.executeQuery("SELECT COUNT(*) FROM parties");
+			Requete = state.executeQuery("SELECT MAX(numPartie) FROM parties");
 			if (Requete.next()){
 				int nb = Requete.getInt(1); // affectation de Count par la requete
 				return nb;	

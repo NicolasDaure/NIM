@@ -9,12 +9,13 @@ public class OperationsJeu {
 	public static Random aleatoire = new Random();
 
 	
-	public static void nouvellePartie(Scanner clavier, long idPartie, Joueur j, IA ia){
+	public static void nouvellePartie(Scanner clavier, Joueur j, IA ia){
 		System.out.println("*******NOUVELLE PARTIE 1J**********\n");
 		j.setPartiesJouees(j.getPartiesJouees() + 1);
-		Partie theGame = new Partie(idPartie);
-
+		
+		Partie theGame = new Partie(InsertPartie.getLastIdParties() + 1);
 		theGame.remplir();
+		
 		Joueur premierAJouer = premierJoueur(j, ia);
 		Joueur gagnant;
 		if(premierAJouer.equals(j)){
@@ -34,11 +35,11 @@ public class OperationsJeu {
 		j.setListeCoups(new ArrayList<Coup>());	
 	}
 	
-	public static void nouvellePartie2J(Scanner clavier, long idPartie, Joueur j1, Joueur j2){
+	public static void nouvellePartie2J(Scanner clavier, Joueur j1, Joueur j2){
 		System.out.println("*******NOUVELLE PARTIE 2J**********\n");
 		j1.setPartiesJouees(j1.getPartiesJouees() + 1);
 		j2.setPartiesJouees(j2.getPartiesJouees() + 1);
-		Partie theGame = new Partie(idPartie);
+		Partie theGame = new Partie(InsertPartie.getLastIdParties() + 1);
 		theGame.remplir();	
 		Joueur premierAJouer = premierJoueur(j1,j2);
 		if(premierAJouer.equals(j2)){

@@ -42,7 +42,7 @@ public class OperationsBDD {
 
 
 	public static void uploadCoups(Joueur j){
-		int numPartie = InsertPartie.nbParties();
+		int numPartie = InsertPartie.getLastIdParties();
 		int idJoueur = j.getIdJoueur();
 		for(int i = 0; i < j.getListeCoups().size(); i++){
 			int n = InsertCoup.nbCoups() + 1;
@@ -50,6 +50,10 @@ public class OperationsBDD {
 			int ligne =j.getListeCoups().get(i).getNumeroLigne() + 1;
 			InsertCoup.insertCoup(n,nbjetons,ligne,idJoueur,numPartie);
 		}
+	}
+	
+	public static void uploadPartie(Partie p){
+		
 	}
 	
 }

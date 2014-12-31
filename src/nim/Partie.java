@@ -10,7 +10,7 @@ public class Partie {
 	static int nbJetonsMaxLigne = 14;
 	static Random aleatoire = new Random();
 
-	private long idPartie;
+	private int idPartie;
 	private int nbLignes;
 	private int nbJetons;
 	private ArrayList<Ligne> lignesPartie;
@@ -25,7 +25,7 @@ public class Partie {
 		}
 	}
 	
-	public Partie(long codePartie){
+	public Partie(int codePartie){
 		this.setIdPartie(codePartie);
 		this.nbLignes = 3 + aleatoire.nextInt(3);
 		this.nbJetons = this.nbLignes * nbJetonsMaxLigne - aleatoire.nextInt((this.nbLignes * nbJetonsMaxLigne)/3);
@@ -134,11 +134,11 @@ public class Partie {
 		return this.lignesPartie;
 	}
 
-	public long getIdPartie() {
+	public int getIdPartie() {
 		return idPartie;
 	}
 
-	public void setIdPartie(long idPartie) {
+	public void setIdPartie(int idPartie) {
 		this.idPartie = idPartie;
 	}
 	

@@ -4,64 +4,85 @@ import java.util.*;
 
 public class Jeu {
 
-	public static Joueur joueurTemp;
 	public static Joueur joueur1;
 	public static Joueur joueur2;
+	public static Scanner clavier = new Scanner(System.in);
+	public static boolean joueur2Connecte = false;
+	public static boolean joueurConnecte = false;
 
+	
 	public static void main(String args[]){
+		
+		char choix;
+
+		//Connextion joueur 1
+		System.out.println("<<<<<<<<<<<<<<<BIENVENUE SUR JEU DE NIM>>>>>>>>>>>>>>>\n"
+				+ "Saisir le nombre correspondant...\n"
+				+ "1.Login\n"
+				+ "2.Inscription");
+		do{
+			choix = clavier.next().charAt(0);
+		}while(choix != '1' && choix != '2');
+
+		choixCompte(choix);
+		joueur1 = OperationsComptes.joueurTemp;
+		joueurConnecte = true;
+		
+
+		//À partir de là on a le premier joueur.
+		while(joueurConnecte){
+			
+			System.out.println("<<<<<<<<<<<<<<< MENU >>>>>>>>>>>>>>>\n"
+					+ "Saisir le nombre correspondant...\n"
+					+ "1.Partie Solo\n"
+					+ "2.Partie 2 joueurs");
+			do{
+				choix = clavier.next().charAt(0);
+			}while(choix != '1' && choix != '2');
+
+			if(choix == 1){
+				IA bot = new IA();
+				OperationsJeu.nouvellePartie(clavier, joueur1, bot);
+			}
+
+			else if(choix == 2){
+				if(joueur2Connecte == false){
+					System.out.println("<<<<<<<<<<<<<<< JOUEUR 2 >>>>>>>>>>>>>>>\n"
+							+ "Cette partie nécessite 2 joueurs, saisir le nombre correspondant...\n"
+							+ "1.Login\n"
+							+ "2.Inscription");
+					do{
+						choix = clavier.next().charAt(0);
+					}while(choix != '1' && choix != '2');
+					choixCompte(choix);
+					joueur2 = OperationsComptes.joueurTemp;
+					joueur2Connecte = true;
+				}
+				OperationsJeu.nouvellePartie2J(clavier, joueur1, joueur2);
+			}
+		}
+	}
+	
+	public static void choixCompte(char c){
+		
+		if(c == 1){
+			boolean loginReussi = false;
+			while(!loginReussi){
+				loginReussi = OperationsComptes.loginJoueur(clavier);
+			}
+		}
+
+		else if(c == 2){
+			boolean inscriptionReussie = false;
+			while(!inscriptionReussie){
+				inscriptionReussie = OperationsComptes.inscrireJoueur(clavier);
+			}
+		}
 		
 	}
 
 
-	//----------------------------LOGIN--------------------------
-	
-	public static boolean loginJoueur(Scanner clavier){
-		boolean loginReussi = false;
-		System.out.println("Saisir votre pseudo :");
-		String pseudoJoueur = clavier.next();
-		System.out.println("Saisir votre mot de passe :");
-		String password = clavier.next();
-		try{
-			OperationsComptes.pseudoConforme(pseudoJoueur);
-		}
-		catch(InscriptionException ie){
-			ie.getMessage();
-		}
-		try{
-			OperationsComptes.pseudoExistant(pseudoJoueur);
-			OperationsComptes.verificationMdp(pseudoJoueur, password);
-			joueurTemp = OperationsBDD.downloadJoueur(pseudoJoueur);
-			loginReussi = true;
-		}
-		catch(LoginException le){
-			le.getMessage();
-		}
-		return loginReussi;	
-	}
 
-	/*--------------------------INSCRIPTION------------------------------*/
-
-	public static boolean inscrireJoueur(Scanner clavier){
-		boolean inscriptionReussie = false;
-		System.out.println("Nouveau joueur :");
-		String pseudoNouveauJoueur = clavier.next();
-		System.out.println("Saisir un mot de passe :");
-		String password1 = clavier.next();
-		System.out.println("Répéter le mot de passe");
-		String password2 = clavier.next();
-		try{
-			OperationsComptes.pseudoConforme(pseudoNouveauJoueur);
-			OperationsComptes.pseudoLibre(pseudoNouveauJoueur);
-			OperationsComptes.mdp1EqualsMdp2(password1, password2);
-			OperationsBDD.insererJoueurBD(pseudoNouveauJoueur, password1);
-			joueurTemp = OperationsBDD.downloadJoueur(pseudoNouveauJoueur);
-			inscriptionReussie = true;
-		}
-		catch(InscriptionException ie){
-			ie.getMessage();
-		}
-		return inscriptionReussie;
-	}
 
 
 }

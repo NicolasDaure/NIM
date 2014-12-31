@@ -18,7 +18,7 @@ public class AjoutJoueur {
 
 			ResultSet Requete = null; // indispensable pour le count (sinom java pas content)
 			Statement state = conn.createStatement();
-			Requete = state.executeQuery("SELECT COUNT(*) FROM joueurs");
+			Requete = state.executeQuery("SELECT MAX(num_joueur) FROM joueurs");
 			if (Requete.next()){
 				int nb = Requete.getInt(1); // affectation de Count par la requete
 				return nb	;	

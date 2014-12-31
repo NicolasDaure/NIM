@@ -20,7 +20,7 @@ public class OperationsBDD {
 		}
 	}
 
-	public static void insererJoueurBD(String pseudo, String password){  //fonction OK
+	public static void insererJoueur(String pseudo, String password){  //fonction OK
 		int n = AjoutJoueur.nbJoueurs() + 1;
 		AjoutJoueur.ajouterNouveauJoueur(n, pseudo, password);
 	}
@@ -52,8 +52,5 @@ public class OperationsBDD {
 		}
 	}
 	
-	public static void uploadPartie(Partie p){
-		
-	}
 	
 }

@@ -23,15 +23,12 @@ public class Jeu {
 		do{
 			choix = clavier.next().charAt(0);
 		}while(choix != '1' && choix != '2');
-
-		choixCompte(choix);
+		choixTypeLog(choix);
 		joueur1 = OperationsComptes.joueurTemp;
 		joueurConnecte = true;
-		
 
 		//À partir de là on a le premier joueur.
-		while(joueurConnecte){
-			
+		while(joueurConnecte){			
 			System.out.println("<<<<<<<<<<<<<<< MENU >>>>>>>>>>>>>>>\n"
 					+ "Saisir le nombre correspondant...\n"
 					+ "1.Partie Solo\n"
@@ -54,7 +51,7 @@ public class Jeu {
 					do{
 						choix = clavier.next().charAt(0);
 					}while(choix != '1' && choix != '2');
-					choixCompte(choix);
+					choixTypeLog(choix);
 					joueur2 = OperationsComptes.joueurTemp;
 					joueur2Connecte = true;
 				}
@@ -63,27 +60,24 @@ public class Jeu {
 		}
 	}
 	
-	public static void choixCompte(char c){
-		
+	
+	
+	
+	public static void choixTypeLog(char c){		
 		if(c == 1){
 			boolean loginReussi = false;
 			while(!loginReussi){
 				loginReussi = OperationsComptes.loginJoueur(clavier);
 			}
 		}
-
 		else if(c == 2){
 			boolean inscriptionReussie = false;
 			while(!inscriptionReussie){
 				inscriptionReussie = OperationsComptes.inscrireJoueur(clavier);
 			}
-		}
-		
+		}		
 	}
-
-
-
-
-
+	
+	
 }
 

@@ -88,7 +88,7 @@ public class RecuperationDonnees {
 
 			ResultSet result = state.executeQuery("SELECT * FROM joueurs WHERE pseudo_joueur ="+pseudo);
 			if( result.next()){
-				identifiant =(int) result.getObject(1);
+				identifiant =(int) result.getObject(1);//ERREUR ICI
 			}  
 		}	
 		catch (Exception e) { 

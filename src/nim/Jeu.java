@@ -37,12 +37,12 @@ public class Jeu {
 				choix = clavier.next().charAt(0);
 			}while(choix != '1' && choix != '2');
 
-			if(choix == 1){
+			if(choix == '1'){
 				IA bot = new IA();
 				OperationsJeu.nouvellePartie(clavier, joueur1, bot);
 			}
 
-			else if(choix == 2){
+			else if(choix == '2'){
 				if(joueur2Connecte == false){
 					System.out.println("<<<<<<<<<<<<<<< JOUEUR 2 >>>>>>>>>>>>>>>\n"
 							+ "Cette partie nécessite 2 joueurs, saisir le nombre correspondant...\n"
@@ -64,13 +64,13 @@ public class Jeu {
 	
 	
 	public static void choixTypeLog(char c){		
-		if(c == 1){
+		if(c == '1'){
 			boolean loginReussi = false;
 			while(!loginReussi){
 				loginReussi = OperationsComptes.loginJoueur(clavier);
 			}
 		}
-		else if(c == 2){
+		else if(c == '2'){
 			boolean inscriptionReussie = false;
 			while(!inscriptionReussie){
 				inscriptionReussie = OperationsComptes.inscrireJoueur(clavier);
